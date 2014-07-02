@@ -1,40 +1,36 @@
-class LayoutConvert 
 
-  @@LAYOUTS = {
+class ::String
+  
+  LAYOUTS = {
     lat: %q!qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?!.scan(/./),
     cyr:  %q!йцукенгшщзхъфывапролджэячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,!.scan(/./)
   }
 
-  @@LANG = {
+  LANG = {
     lat: ('a'..'z').to_a + ('A'..'Z').to_a,
     cyr: ('а'..'я').to_a + ('А'..'Я').to_a
   }
 
-  def initialize(string)
-    @string = string
-    @current_layout = guess_layout
-  end
-
-  def switch_layout
-    layout_map = if @current_layout == :lat then
-                   Hash[@@LAYOUTS[:lat].zip @@LAYOUTS[:cyr]]
-                 else
-                   Hash[@@LAYOUTS[:cyr].zip @@LAYOUTS[:lat]] 
-                 end
-    @current_layout = if @current_layout == :lat then :cyr else :lat end
-
-    @string = @string.scan(/./).map do |ch| 
-      layout_map[ch].nil? ? ch : layout_map[ch] 
-    end.join
-  end
-
-  private
-    
-    def guess_layout 
-      if (@string.scan(/[[:alpha:]]/).uniq - @@LANG[:lat]).empty? 
-        :lat 
-      else 
-        :cyr 
-      end
+  def guess_layout 
+    letters = self.scan(/[[:alpha:]]/).uniq
+    if (letters - LANG[:lat]).empty? 
+      :lat 
+    elsif (letters - LANG[:cyr]).empty? 
+      :cyr 
+    else
+      :mixed
     end
+  end
+
+  def cyrillic?
+    self.guess_layout.equal?(:cyr)
+  end
+
+  def latin?
+    self.guess_layout.equal?(:lat)
+  end
+
+  def mixed?
+    self.guess_layout.equal?(:mixed)
+  end
 end
