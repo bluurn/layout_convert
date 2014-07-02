@@ -33,4 +33,16 @@ class ::String
   def mixed?
     self.guess_layout.equal?(:mixed)
   end
+
+  def change_layout
+    layout_map = if self.latin? then
+                   Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
+                 elsif self.cyrillic?
+                   Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
+                 end
+
+    self.scan(/./).map do |ch|
+      layout_map[ch].nil? ? ch : layout_map[ch]
+    end.join
+  end
 end

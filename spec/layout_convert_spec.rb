@@ -5,6 +5,9 @@ describe "A magic mixin module" do
   let(:cyrillic_example) { 'здравствуй, мир' }
   let(:mixed_example) { 'здравствуй, мир world' }
 
+  let(:latin_example_in_cyrillic) { 'руддщ цщкдв' }
+  let(:cyrillic_example_in_latin) { 'plhfdcndeq? vbh' }
+  
   describe "has the 'guess_layout'" do
     it "should guess the latin layout of the string with latin chars" do
       expect(latin_example.guess_layout).to be_equal :lat
@@ -56,6 +59,15 @@ describe "A magic mixin module" do
 
     it "should return false if the given string is both latin and mixed" do
       expect(mixed_example.mixed?).to be true 
+    end
+  end
+  
+  describe "has the 'change_layout_method" do
+    it "should convert cyrillic string in latin to cyrillic" do
+      expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example
+    end
+    it "should convert cyrillic latin in cyrillic to latin" do
+      expect(latin_example_in_cyrillic.change_layout).to be_eql latin_example 
     end
   end
 end 
