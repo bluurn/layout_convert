@@ -1,4 +1,3 @@
-
 class ::String
   
   LAYOUTS = {
