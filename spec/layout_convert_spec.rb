@@ -7,7 +7,8 @@ describe "A magic mixin module" do
 
   let(:latin_example_in_cyrillic) { 'руддщ цщкдв' }
   let(:cyrillic_example_in_latin) { 'plhfdcndeq? vbh' }
-  
+  let(:mixed_example_puzzle) { "Z ckeif. njkmrj Кщслфишддн" }
+
   describe "has the 'guess_layout'" do
     it "should guess the latin layout of the string with latin chars" do
       expect(latin_example.guess_layout).to be_equal :lat
@@ -62,9 +63,18 @@ describe "A magic mixin module" do
     end
   end
   
+  describe "has the 'latinish?' method" do
+    it "should return true if there are more latin letters than cyrillic" do
+      expect(mixed_example_puzzle.latinish?).to be true
+    end
+    it "should return false if there are more cyrillic letters than latin" do
+      expect(mixed_example_puzzle.latinish?).to be false
+    end
+  end
+
   describe "has the 'change_layout_method" do
     it "should convert cyrillic string in latin to cyrillic" do
-      expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example
+      expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example 
     end
     it "should convert cyrillic latin in cyrillic to latin" do
       expect(latin_example_in_cyrillic.change_layout).to be_eql latin_example 
