@@ -37,7 +37,7 @@ describe "A magic mixin module" do
 
   describe "has the 'latin?' method" do
     it "should return false if the given string is cyrillic" do
-      expect(cyrillic_example.latin?).to be false 
+      expect(cyrillic_example.latin?).to be false
     end
 
     it "should return true if the given string is latin" do
@@ -51,7 +51,7 @@ describe "A magic mixin module" do
 
   describe "has the 'mixed?' method" do
     it "should return true if the given string is cyrillic" do
-      expect(cyrillic_example.mixed?).to be false 
+      expect(cyrillic_example.mixed?).to be false
     end
 
     it "should return false if the given string is latin" do
@@ -59,10 +59,10 @@ describe "A magic mixin module" do
     end
 
     it "should return false if the given string is both latin and mixed" do
-      expect(mixed_example.mixed?).to be true 
+      expect(mixed_example.mixed?).to be true
     end
   end
-  
+
   describe "has the 'latinish?' method" do
     it "should return true if there are more latin letters than cyrillic" do
       expect(mixed_example_puzzle.latinish?).to be true
@@ -74,10 +74,10 @@ describe "A magic mixin module" do
 
   describe "has the 'change_layout_method" do
     it "should convert cyrillic string in latin to cyrillic" do
-      expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example 
+      expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example
     end
     it "should convert cyrillic latin in cyrillic to latin" do
-      expect(latin_example_in_cyrillic.change_layout).to be_eql latin_example 
+      expect(latin_example_in_cyrillic.change_layout).to be_eql latin_example
     end
   end
-end 
+end

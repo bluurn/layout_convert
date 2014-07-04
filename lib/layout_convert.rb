@@ -1,5 +1,5 @@
 class ::String
-  
+
   LAYOUTS = {
     lat: %q!qwertyuiop[]asdfghjkl;'zxcvbnm,./QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?!.scan(/./),
     cyr:  %q!йцукенгшщзхъфывапролджэячсмитьбю.ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,!.scan(/./)
@@ -10,12 +10,14 @@ class ::String
     cyr: ('а'..'я').to_a + ('А'..'Я').to_a
   }
 
-  def guess_layout 
+  SPLIT_REGEX =/[a-zA-Zа-яА-Я\[\];',\.\/{}:"<>?]+/
+
+  def guess_layout
     letters = self.scan(/[[:alpha:]]/).uniq
-    if (letters - LANG[:lat]).empty? 
-      :lat 
-    elsif (letters - LANG[:cyr]).empty? 
-      :cyr 
+    if (letters - LANG[:lat]).empty?
+      :lat
+    elsif (letters - LANG[:cyr]).empty?
+      :cyr
     else
       :mixed
     end
@@ -33,6 +35,10 @@ class ::String
     self.guess_layout.equal?(:mixed)
   end
 
+  def latinish?
+    words = self.scan(SPLIT_REGEX)
+    p words
+  end
   def change_layout
     layout_map = if self.latin? then
                    Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
