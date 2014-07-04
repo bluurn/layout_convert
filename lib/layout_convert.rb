@@ -1,3 +1,6 @@
+##
+# Mix-in necessary methods to make layout swap available
+
 class ::String
 
   LAYOUTS = {
@@ -13,22 +16,31 @@ class ::String
   SPLIT_REGEX =/[a-zA-Zа-яА-Я\[\];',\.\/{}:"<>?]+/
 
 
+  ##
+  # Detect whether the given string is cyrillic
+
   def cyrillic?
     guess_layout.equal?(:cyr)
   end
 
+  ##
+  # Detect whether the given string is latin
   def latin?
     guess_layout.equal?(:lat)
   end
+
+  ##
+  # Detect whether the given string has both latin and cyrillic letters
 
   def mixed?
     guess_layout.equal?(:mixed)
   end
 
+  ##
+  # Detect whether the given string has more latin letters
   def latinish?
     latin_count = cyrillic_count = 0
-    words = self.scan(SPLIT_REGEX)
-    words.each do |word|
+    split_words.each do |word|
       if word.latin?
         latin_count+=1
       else
@@ -38,10 +50,14 @@ class ::String
     latin_count > cyrillic_count
   end
 
+  ##
+  # Detect whether the given string has more cyrillic letters
   def cyrillish?
     !self.latinish?
   end
 
+  ##
+  # Swap the layout
   def swap_layout
     if self.latinish? || self.cyrillish?
       split_words.map do |word|
@@ -55,28 +71,37 @@ class ::String
 
   private
 
-    def guess_layout
-      letters = self.scan(/[[:alpha:]]/).uniq
-      if (letters - LANG[:lat]).empty?
-        :lat
-      elsif (letters - LANG[:cyr]).empty?
-        :cyr
-      else
-        :mixed
-      end
-    end
+  ##
+  # Guess the layout
 
-    def split_words
-      self.scan SPLIT_REGEX
+  def guess_layout
+    letters = self.scan(/[[:alpha:]]/).uniq
+    if (letters - LANG[:lat]).empty?
+      :lat
+    elsif (letters - LANG[:cyr]).empty?
+      :cyr
+    else
+      :mixed
     end
+  end
 
-    def set_layout(word = self)
-      if word.latin? then
-        Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
-      elsif word.cyrillic?
-        Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
-      else
-        throw "Cannot detect layout"
-      end
+  ##
+  # Split words using tricky regex
+
+  def split_words
+    self.scan SPLIT_REGEX
+  end
+
+  ##
+  # Set the layout hash
+
+  def set_layout(word = self)
+    if word.latin? then
+      Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
+    elsif word.cyrillic?
+      Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
+    else
+      throw "Cannot detect layout"
     end
+  end
 end
