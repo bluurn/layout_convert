@@ -8,7 +8,8 @@ describe "A magic mixin module" do
   let(:latin_example_in_cyrillic) { 'руддщ цщкдв' }
   let(:cyrillic_example_in_latin) { 'plhfdcndeq? vbh' }
   let(:mixed_example_puzzle) { "Z ckeif. njkmrj Кщслфишддн" }
-
+  let(:mixed_example_puzzle_two) { "Вкштл мщвлф фвт здфн ,fkfkfqrf" }
+  
   describe "has the 'guess_layout'" do
     it "should guess the latin layout of the string with latin chars" do
       expect(latin_example.guess_layout).to be_equal :lat
@@ -68,7 +69,7 @@ describe "A magic mixin module" do
       expect(mixed_example_puzzle.latinish?).to be true
     end
     it "should return false if there are more cyrillic letters than latin" do
-      expect(mixed_example_puzzle.latinish?).to be false
+      expect(mixed_example_puzzle_two.latinish?).to be false
     end
   end
 
