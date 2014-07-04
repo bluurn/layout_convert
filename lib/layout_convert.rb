@@ -12,27 +12,17 @@ class ::String
 
   SPLIT_REGEX =/[a-zA-Zа-яА-Я\[\];',\.\/{}:"<>?]+/
 
-  def guess_layout
-    letters = self.scan(/[[:alpha:]]/).uniq
-    if (letters - LANG[:lat]).empty?
-      :lat
-    elsif (letters - LANG[:cyr]).empty?
-      :cyr
-    else
-      :mixed
-    end
-  end
 
   def cyrillic?
-    self.guess_layout.equal?(:cyr)
+    guess_layout.equal?(:cyr)
   end
 
   def latin?
-    self.guess_layout.equal?(:lat)
+    guess_layout.equal?(:lat)
   end
 
   def mixed?
-    self.guess_layout.equal?(:mixed)
+    guess_layout.equal?(:mixed)
   end
 
   def latinish?
@@ -57,10 +47,27 @@ class ::String
                    Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
                  elsif self.cyrillic?
                    Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
+                 elsif self.latinish?
+                   throw "Not implemented"
+                 elsif self.cyrillish?
+                   throw "Not implemented"
                  end
 
     self.scan(/./).map do |ch|
       layout_map[ch].nil? ? ch : layout_map[ch]
     end.join
   end
+
+  private
+
+    def guess_layout
+      letters = self.scan(/[[:alpha:]]/).uniq
+      if (letters - LANG[:lat]).empty?
+        :lat
+      elsif (letters - LANG[:cyr]).empty?
+        :cyr
+      else
+        :mixed
+      end
+    end
 end

@@ -16,13 +16,13 @@ describe "A magic mixin module" do
 
   describe "has the 'guess_layout'" do
     it "should guess the latin layout of the string with latin chars" do
-      expect(latin_example.send('guess_layout')).to be_equal :lat
+      expect(latin_example.guess_layout).to be_equal :lat
     end
     it "should guess the cyrillic layout of the string with cyrillic chars" do
-      expect(cyrillic_example.send('guess_layout')).to be_equal :cyr
+      expect(cyrillic_example.guess_layout).to be_equal :cyr
     end
     it "should guess the mixed layout of the string with cyrillic and latin chars" do
-      expect(mixed_example.send('guess_layout')).to be_equal :mixed
+      expect(mixed_example.guess_layout).to be_equal :mixed
     end
   end
 
@@ -103,3 +103,4 @@ describe "A magic mixin module" do
     end
   end
 end
+''.test
