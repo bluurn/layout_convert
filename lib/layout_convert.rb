@@ -36,9 +36,18 @@ class ::String
   end
 
   def latinish?
+    latin_count = cyrillic_count = 0
     words = self.scan(SPLIT_REGEX)
-    p words
+    words.each do |word| 
+      if word.latin? 
+        latin_count+=1 
+      else 
+        cyrillic_count+=1 
+      end 
+    end 
+    latin_count > cyrillic_count
   end
+
   def change_layout
     layout_map = if self.latin? then
                    Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
