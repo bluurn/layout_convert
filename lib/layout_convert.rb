@@ -42,20 +42,15 @@ class ::String
     !self.latinish?
   end
 
-  def change_layout
-    layout_map = if self.latin? then
-                   Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
-                 elsif self.cyrillic?
-                   Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
-                 elsif self.latinish?
-                   throw "Not implemented"
-                 elsif self.cyrillish?
-                   throw "Not implemented"
-                 end
-
-    self.scan(/./).map do |ch|
-      layout_map[ch].nil? ? ch : layout_map[ch]
-    end.join
+  def swap_layout
+    if self.latinish? || self.cyrillish?
+      split_words.map do |word|
+        layout_map = set_layout word
+        word.scan(/./).map do |ch|
+          layout_map[ch].nil? ? ch : layout_map[ch]
+        end.join
+      end.join ' '
+    end
   end
 
   private
@@ -68,6 +63,20 @@ class ::String
         :cyr
       else
         :mixed
+      end
+    end
+
+    def split_words
+      self.scan SPLIT_REGEX
+    end
+
+    def set_layout(word = self)
+      if word.latin? then
+        Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
+      elsif word.cyrillic?
+        Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
+      else
+        throw "Cannot detect layout"
       end
     end
 end

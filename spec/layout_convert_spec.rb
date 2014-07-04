@@ -9,7 +9,7 @@ describe "A magic mixin module" do
   let(:cyrillic_example_in_latin) { 'plhfdcndeq? vbh' }
 
   let(:mixed_example_puzzle) { "Z ckeif. njkmrj Кщслфишддн" }
-  let(:mixed_example_puzzle_two) { "Вкштл мщвлф фвт здфн ,fkfkfqrf" }
+  let(:mixed_example_puzzle_two) { "Вкштл мщвлф фтв здфн ,fkfkfqrf" }
 
   let(:mixed_example_puzzle_solution) { "Я слушаю только Rockabilly" }
   let(:mixed_example_puzzle_two_solution) { "Drink vodka and play балалайка" }
@@ -86,19 +86,19 @@ describe "A magic mixin module" do
     end
   end
 
-  describe "has the 'change_layout' method" do
+  describe "has the 'swap_layout' method" do
     it "should convert cyrillic string in latin to cyrillic" do
-      expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example
+      expect(cyrillic_example_in_latin.swap_layout).to be_eql cyrillic_example
     end
     it "should convert cyrillic latin in cyrillic to latin" do
-      expect(latin_example_in_cyrillic.change_layout).to be_eql latin_example
+      expect(latin_example_in_cyrillic.swap_layout).to be_eql latin_example
     end
     describe "with mixed puzzles" do
       it "should convert latinish puzzle correctly" do
-        expect(mixed_example_puzzle.change_layout).to be_eql mixed_example_puzzle_solution
+        expect(mixed_example_puzzle.swap_layout).to be_eql mixed_example_puzzle_solution
       end
       it "should convert cyrillish puzzle correctly" do
-        expect(mixed_example_puzzle_two.change_layout).to be_eql mixed_example_puzzle_two_solution
+        expect(mixed_example_puzzle_two.swap_layout).to be_eql mixed_example_puzzle_two_solution
       end
     end
   end
