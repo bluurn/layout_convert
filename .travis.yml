@@ -1,4 +1,4 @@
 language: ruby
 rvm:
   - "2.0.0"
-script: rspec spec
+script: rake spec_all
