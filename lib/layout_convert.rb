@@ -99,8 +99,6 @@ class ::String
       Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
     elsif word.cyrillic?
       Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
-    else
-      throw "Cannot detect layout"
     end
   end
 end
