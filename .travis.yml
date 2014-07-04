@@ -1,4 +1,7 @@
 language: ruby
 rvm:
   - "2.0.0"
-script: build.sh
+script: rake spec_all
+addons:
+  code_climate:
+    repo_token: 51960221e8151ad9b40733ea47d536f89f5da3f418b350297c06f23e45f11e14
