@@ -9,24 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["bluurn"]
   spec.email         = ["bluurn@gmail.com"]
   spec.summary       = %q{Basic string Latin <-> Cyrillic Layour swapper }
-  spec.description   = %q{
-A String class now has these methods available
-* cyrillic?
-* latin?
-* mixed?
-* cyrillish?
-* latinish?
-* swap_layout
-Usage: It's simple, just type
-```
-"ghbdtn".swap_layout
-```
-And you will get this result
-```
-=> "привет"
-```
-Easy! :)
-}
+  spec.description   = %q{https://github.com/bluurn/layout_convert/}
   spec.homepage      = ""
   spec.license       = "MIT"
 
