@@ -48,6 +48,10 @@ class ::String
     latin_count > cyrillic_count
   end
 
+  def cyrillish?
+    !self.latinish?
+  end
+
   def change_layout
     layout_map = if self.latin? then
                    Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]

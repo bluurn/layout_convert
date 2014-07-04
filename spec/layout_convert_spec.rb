@@ -73,6 +73,15 @@ describe "A magic mixin module" do
     end
   end
 
+  describe "has the 'cyrillish?' method" do
+    it "should return true if there are more cyrillic letters than latin?" do
+      expect(mixed_example_puzzle_two.cyrillish?).to be true
+    end
+    it "should return false if there are more latin letters than cyrillic" do
+      expect(mixed_example_puzzle.cyrillish?).to be false
+    end
+  end
+
   describe "has the 'change_layout_method" do
     it "should convert cyrillic string in latin to cyrillic" do
       expect(cyrillic_example_in_latin.change_layout).to be_eql cyrillic_example
