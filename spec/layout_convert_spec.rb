@@ -1,3 +1,4 @@
+require "spec_helper"
 require "layout_convert"
 
 describe "A magic mixin module" do
