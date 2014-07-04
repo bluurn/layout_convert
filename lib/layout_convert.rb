@@ -15,7 +15,6 @@ class ::String
 
   SPLIT_REGEX =/[a-zA-Zа-яА-Я\[\];',\.\/{}:"<>?]+/
 
-
   ##
   # Detect whether the given string is cyrillic
 
@@ -96,7 +95,7 @@ class ::String
   # Set the layout hash
 
   def set_layout(word = self)
-    if word.latin? then
+    if word.latin?
       Hash[LAYOUTS[:lat].zip LAYOUTS[:cyr]]
     elsif word.cyrillic?
       Hash[LAYOUTS[:cyr].zip LAYOUTS[:lat]]
