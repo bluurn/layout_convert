@@ -9,7 +9,7 @@ describe "A magic mixin module" do
   let(:cyrillic_example_in_latin) { 'plhfdcndeq? vbh' }
   let(:mixed_example_puzzle) { "Z ckeif. njkmrj Кщслфишддн" }
   let(:mixed_example_puzzle_two) { "Вкштл мщвлф фвт здфн ,fkfkfqrf" }
-  
+
   describe "has the 'guess_layout'" do
     it "should guess the latin layout of the string with latin chars" do
       expect(latin_example.guess_layout).to be_equal :lat

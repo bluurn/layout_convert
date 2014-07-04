@@ -38,13 +38,13 @@ class ::String
   def latinish?
     latin_count = cyrillic_count = 0
     words = self.scan(SPLIT_REGEX)
-    words.each do |word| 
-      if word.latin? 
-        latin_count+=1 
-      else 
-        cyrillic_count+=1 
-      end 
-    end 
+    words.each do |word|
+      if word.latin?
+        latin_count+=1
+      else
+        cyrillic_count+=1
+      end
+    end
     latin_count > cyrillic_count
   end
 
