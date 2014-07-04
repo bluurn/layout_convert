@@ -16,7 +16,17 @@ A String class now has these methods available
 * mixed?
 * cyrillish?
 * latinish?
-* swap_layout }
+* swap_layout
+Usage: It's simple, just type
+```
+"ghbdtn".swap_layout
+```
+And you will get this result
+```
+=> "привет"
+```
+Easy! :)
+}
   spec.homepage      = ""
   spec.license       = "MIT"
 

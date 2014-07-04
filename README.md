@@ -7,3 +7,15 @@ A String class now has these methods available
 * cyrillish?
 * latinish?
 * swap_layout
+
+## Usage
+
+It's simple, just type
+```
+"ghbdtn".swap_layout
+```
+And you will get this result
+```
+=> "привет"
+```
+Easy! :)
