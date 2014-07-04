@@ -103,4 +103,9 @@ describe "A magic mixin module" do
       end
     end
   end
+  describe "has the 'split_words' method" do
+    it "should split words correctly" do
+      expect(latin_example.send('split_words').length).to be_equal 2
+    end
+  end
 end
